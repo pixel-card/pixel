@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Smart Card</title>
+
+    <link rel="icon" href="img/logo.png" type="image">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="share-trigger" onclick="toggleShareMenu(true)" title="Share Profile">
+            <i class="fas fa-share-nodes"></i>
+        </div>
+
+        <header class="top">
+            <div class="image">
+                <img class="my_photo" src="img/my_photo.jpg?v=1" alt="Pixel">
+            </div>
+            <h1>Pixel</h1>
+            <p class="card">Smart Card NFC.</p>
+            <p class="bio">🚀كارت واحد… إمكانيات ملهاش آخر</p>
+        </header>
+
+        <div class="slider-container">
+            <div class="slider-images">
+                <img src="img/img2/1.jpg" alt="">
+                <img src="img/img2/2.jpg" alt="">
+                <img src="img/img2/3.jpg" alt="">
+                <img src="img/img2/4.jpg" alt="">
+                <img src="img/img2/5.jpg" alt="">
+                <img src="img/img2/6.jpg" alt="">
+                <img src="img/img2/7.jpg" alt="">
+            </div>
+            <button class="prev-button"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-button"><i class="fas fa-chevron-right"></i></button>
+            <div class="dots-container"></div>
+        </div>
+
+        <div class="video-container">
+            <video src="img/vid.mp4" controls poster="img/img2/poster.jpg"></video>
+        </div>
+
+        <ul class="links">
+            <li>
+                <a href="javascript:void(0)" onclick="toggleDetailsMenu(true)">
+                    <i class="fas fa-info-circle"></i> Details
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="togglePaymentMenu(true)">
+                    <i class="fas fa-money-bill-wave"></i> Payment
+                </a>
+            </li>
+            <li>
+                <a href="https://wa.me/201031898392" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Whatsapp
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/pixe1_NFC" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </li>
+        </ul>
+
+        <div id="share-menu" class="call-menu-overlay" onclick="toggleShareMenu(false)">
+            <div class="call-menu-content" onclick="event.stopPropagation()">
+                <h3>Share My Card</h3>
+                <div id="qrcode-container">
+                    <img id="qr-code" src="" alt="QR Code">
+                </div>
+                <div class="share-actions">
+                    <button class="num-link" onclick="copyToClipboard()">
+                        <i class="fas fa-copy"></i> <span id="copy-text">Copy Link</span>
+                    </button>
+                </div>
+                <button class="close-btn" onclick="toggleShareMenu(false)">Close</button>
+            </div>
+        </div>
+
+        <div id="payment-menu" class="call-menu-overlay" onclick="togglePaymentMenu(false)" style="display: none;">
+            <div class="call-menu-content" onclick="event.stopPropagation()">
+                <h3>Choose Payment Method</h3>
+                <a href="tel:*9*7*01031898392*#" class="num-link">
+                    <i class="fas fa-mobile-alt"></i> Vodafone Cash
+                </a>
+                <a href="https://ipn.eg/S/ahmedreda277019/instapay/9JUvPa" target="_blank" class="num-link">
+                    <i class="fas fa-building-columns"></i> InstaPay
+                </a>
+                <button class="close-btn" onclick="togglePaymentMenu(false)">Close</button>
+            </div>
+        </div>
+
+        <div id="details-menu" class="call-menu-overlay" onclick="toggleDetailsMenu(false)">
+            <div class="call-menu-content" onclick="event.stopPropagation()">
+                <h3>Card Details</h3>
+                <p class="details">
+                    وداعاً للكروت الورق اللي بتترمى في المحفظة وبتتنسي! 🙅‍♂️<br>
+                    <span class="txt">كارت Pixel</span> الذكي وصل.. بلمسة واحدة لموبايلك، كل بياناتك ولينكاتك والـ 
+                    Portfolio بتاعك هينوروا على شاشة اللي قدامك<br>
+                    تكنولوجيا الـ NFC و الـ QR Code في كارت واحد! 🚀<br>
+                    وحتى لو الموبايل قديم، الـ QR Code موجود في ضهر الكارت عشان مفيش حد يفوت فرصة التواصل معاك! <br>
+                    اطلب كارتك دلوقتي وخليك سابق بخطوة
+                </p>
+                <button class="close-btn" onclick="toggleDetailsMenu(false)">Close</button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <a href="https://wa.me/201031898392" target="_blank" class="powered-by">
+                <span>Create your page &gt;</span>
+                <img src="img/logo.png" alt="Pixel Logo" class="pi-logo">
+            </a>
+            <p class="copyright">© 2026 Pixel. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        function toggleShareMenu(open) {
+            const menu = document.getElementById('share-menu');
+            const qrImg = document.getElementById('qr-code');
+            if(open) {
+                const currentUrl = window.location.href;
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
+                
+                menu.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                document.getElementById('copy-text').innerText = "Copy Link";
+            }
+        }
+
+        function copyToClipboard() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                const copyText = document.getElementById('copy-text');
+                copyText.innerText = "Copied! ✅";
+                setTimeout(() => {
+                    copyText.innerText = "Copy Link";
+                }, 2000);
+            });
+        }
+
+        function togglePaymentMenu(open) {
+            const menu = document.getElementById('payment-menu');
+            open ? openMenu(menu) : closeMenu(menu);
+        }
+
+        function openMenu(menu) {
+            menu.style.display = 'flex'; 
+        }
+
+        function closeMenu(menu) {
+            menu.style.display = 'none';
+        }
+
+        function toggleDetailsMenu(open) {
+            const menu = document.getElementById('details-menu');
+            if(open) {
+                menu.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliderImages = document.querySelector('.slider-images');
+            const images = document.querySelectorAll('.slider-images img');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            const dotsContainer = document.querySelector('.dots-container');
+
+            let currentIndex = 0;
+            const totalImages = images.length;
+            let autoSlideInterval; 
+
+            function updateSlider() {
+                const imageWidth = images[0].clientWidth; // عرض الصورة الواحدة
+                sliderImages.style.transform = `translateX(${-currentIndex * imageWidth}px)`;
+                updateDots();
+            }
+
+            function createDots() {
+                dotsContainer.innerHTML = ''; 
+                for (let i = 0; i < totalImages; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    dot.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateSlider();
+                        resetAutoSlide();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDots() {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalImages; 
+                updateSlider();
+                resetAutoSlide();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                updateSlider();
+                resetAutoSlide();
+            });
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % totalImages;
+                    updateSlider();
+                }, 3000); 
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            createDots(); 
+            updateSlider(); 
+            startAutoSlide(); 
+
+            window.addEventListener('resize', updateSlider);
+        });
+
+    </script>
+</body>
+</html>
