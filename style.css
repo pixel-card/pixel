@@ -215,32 +215,35 @@ h1 {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 18px;
+    background: var(--card-bg);
     border-radius: 15px;
-    color: var(--text-color);
     text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s all ease;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 210, 255, 0.1);
+    transition: 0.3s;
+    cursor: pointer;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .num-link:hover {
     background: var(--primary-color);
     border-color: var(--accent-color);
-    transform: scale(1.02);
 }
 
-.num-link i {
-    color: var(--accent-color);
-    font-size: 1.2rem;
-}
+.num-link i { color: var(--accent-color); }
 
-.call-menu-overlay {
-    display: none; 
-    align-items: flex-end; 
+.close-btn {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    background: none;
+    color: #ff4d4d;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 @keyframes slideUp {
@@ -358,4 +361,5 @@ h1 {
     .my_photo { width: 130px; height: 130px; }
     .share-trigger { top: -10px; right: 10px; }
 }
+
 
